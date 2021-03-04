@@ -16,6 +16,7 @@
 		A8AEDFC725F0CD42006F58D3 /* KakaoImageSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEDFC625F0CD42006F58D3 /* KakaoImageSearchTests.swift */; };
 		A8AEDFD225F0CD42006F58D3 /* KakaoImageSearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEDFD125F0CD42006F58D3 /* KakaoImageSearchUITests.swift */; };
 		A8B105EC25F1621E00489FAA /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B105EB25F1621E00489FAA /* Model.swift */; };
+		A8B105F525F1647900489FAA /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B105F425F1647900489FAA /* APIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		A8AEDFD125F0CD42006F58D3 /* KakaoImageSearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoImageSearchUITests.swift; sourceTree = "<group>"; };
 		A8AEDFD325F0CD42006F58D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8B105EB25F1621E00489FAA /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		A8B105F425F1647900489FAA /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				A8AEDFED25F15DCD006F58D3 /* App */,
 				A8AEDFF425F15DDE006F58D3 /* View */,
 				A8B105F025F1623300489FAA /* Model */,
+				A8B105F925F1647E00489FAA /* Repository */,
 			);
 			path = KakaoImageSearch;
 			sourceTree = "<group>";
@@ -173,6 +176,14 @@
 				A8B105EB25F1621E00489FAA /* Model.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A8B105F925F1647E00489FAA /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				A8B105F425F1647900489FAA /* APIService.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		EFA51087C64F04AEA7BD0B72 /* Pods */ = {
@@ -360,6 +371,7 @@
 			files = (
 				A8B105EC25F1621E00489FAA /* Model.swift in Sources */,
 				A8AEDFB425F0CD3F006F58D3 /* SearchImageViewController.swift in Sources */,
+				A8B105F525F1647900489FAA /* APIService.swift in Sources */,
 				A8AEDFB025F0CD3F006F58D3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
