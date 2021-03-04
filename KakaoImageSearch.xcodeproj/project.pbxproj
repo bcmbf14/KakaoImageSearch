@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7849B79979E8E655FFBEA15D /* Pods_KakaoImageSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6E17DFBE9CEF5426FEABAD /* Pods_KakaoImageSearch.framework */; };
 		A8AEDFB025F0CD3F006F58D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEDFAF25F0CD3F006F58D3 /* AppDelegate.swift */; };
 		A8AEDFB425F0CD3F006F58D3 /* SearchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEDFB325F0CD3F006F58D3 /* SearchImageViewController.swift */; };
 		A8AEDFB725F0CD3F006F58D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8AEDFB525F0CD3F006F58D3 /* Main.storyboard */; };
@@ -34,6 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D6E17DFBE9CEF5426FEABAD /* Pods_KakaoImageSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoImageSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4080C07BADB42545CC60B7C9 /* Pods-KakaoImageSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoImageSearch.debug.xcconfig"; path = "Target Support Files/Pods-KakaoImageSearch/Pods-KakaoImageSearch.debug.xcconfig"; sourceTree = "<group>"; };
+		A080B51571D4E5DE34E0A1EF /* Pods-KakaoImageSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoImageSearch.release.xcconfig"; path = "Target Support Files/Pods-KakaoImageSearch/Pods-KakaoImageSearch.release.xcconfig"; sourceTree = "<group>"; };
 		A8AEDFAC25F0CD3F006F58D3 /* KakaoImageSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakaoImageSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8AEDFAF25F0CD3F006F58D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8AEDFB325F0CD3F006F58D3 /* SearchImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchImageViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7849B79979E8E655FFBEA15D /* Pods_KakaoImageSearch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A76B0E51EC7B2C863F378601 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D6E17DFBE9CEF5426FEABAD /* Pods_KakaoImageSearch.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A8AEDFA325F0CD3F006F58D3 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +94,8 @@
 				A8AEDFC525F0CD42006F58D3 /* KakaoImageSearchTests */,
 				A8AEDFD025F0CD42006F58D3 /* KakaoImageSearchUITests */,
 				A8AEDFAD25F0CD3F006F58D3 /* Products */,
+				EFA51087C64F04AEA7BD0B72 /* Pods */,
+				A76B0E51EC7B2C863F378601 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +164,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EFA51087C64F04AEA7BD0B72 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4080C07BADB42545CC60B7C9 /* Pods-KakaoImageSearch.debug.xcconfig */,
+				A080B51571D4E5DE34E0A1EF /* Pods-KakaoImageSearch.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -156,9 +181,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8AEDFD625F0CD42006F58D3 /* Build configuration list for PBXNativeTarget "KakaoImageSearch" */;
 			buildPhases = (
+				4D1D586F5F8E66A040D447BB /* [CP] Check Pods Manifest.lock */,
 				A8AEDFA825F0CD3F006F58D3 /* Sources */,
 				A8AEDFA925F0CD3F006F58D3 /* Frameworks */,
 				A8AEDFAA25F0CD3F006F58D3 /* Resources */,
+				2AD243803C4416C3BEABE149 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -273,6 +300,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2AD243803C4416C3BEABE149 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KakaoImageSearch/Pods-KakaoImageSearch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KakaoImageSearch/Pods-KakaoImageSearch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KakaoImageSearch/Pods-KakaoImageSearch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D1D586F5F8E66A040D447BB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KakaoImageSearch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A8AEDFA825F0CD3F006F58D3 /* Sources */ = {
@@ -453,6 +522,7 @@
 		};
 		A8AEDFD725F0CD42006F58D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4080C07BADB42545CC60B7C9 /* Pods-KakaoImageSearch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -472,6 +542,7 @@
 		};
 		A8AEDFD825F0CD42006F58D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A080B51571D4E5DE34E0A1EF /* Pods-KakaoImageSearch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
