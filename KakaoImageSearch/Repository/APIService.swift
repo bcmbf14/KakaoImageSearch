@@ -21,48 +21,71 @@ let API_KEY = "KakaoAK babff94d55071a0898f77b445ffd368d"
 
 class APIService {
     
+    static func searchImageRx(_ query: String = "",_ page: Int = 1) -> Observable<[Document]> {
+        return Observable.create { emitter in
+            searchImage(query: query, page: page) { result in
+                switch result {
+                case let .success(documents):
+                    emitter.onNext(documents)
+                    emitter.onCompleted()
+                case let .failure(error):
+                    emitter.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    
+    
     enum Sort: String {
         case accuracy
         case recency
     }
     
-    
-    static func searchImage(_ query: String = "",_ sort: String = Sort.accuracy.rawValue,_ page: Int = 1,_ size: Int = 80) -> Observable<[Document]> {
+    static func searchImage(query: String = "", page: Int = 1,_ sort: String = Sort.accuracy.rawValue,_ size: Int = 80, onComplete: @escaping (Result<[Document], Error>) -> Void) {
         
-        return Observable.create { emitter in
-            let parameters = [
-                "query":query,
-                "sort": sort,
-                "page":"\(page)",
-                "size":"\(size)"
-            ]
-            
-            var components = URLComponents(string: SEARCH_IMAGE_URL)!
-            components.queryItems = parameters.map { URLQueryItem(name: $0, value: $1) }
-            components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
-            
-            let request = URLRequest(url: components.url!)
-            
-            let task = URLSession.shared.dataTask(with: request) { data, _, error in
-                if let error = error {
-                    emitter.onError(error)
-                    return
-                }
-                
-                guard let data = data,
-                      let members = try? JSONDecoder().decode(SearchImage.self, from: data) else {
-                    emitter.onCompleted()
-                    return
-                }
-            
-                emitter.onNext(members.documents)
-                emitter.onCompleted()
+        let parameters = [
+            "query":query,
+            "sort": sort,
+            "page":"\(page)",
+            "size":"\(size)"
+        ]
+        
+        var components = URLComponents(string: SEARCH_IMAGE_URL)!
+        components.queryItems = parameters.map { URLQueryItem(name: $0, value: $1) }
+        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        
+        var request = URLRequest(url: components.url!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue(API_KEY, forHTTPHeaderField: "Authorization")
+//        request.timeoutInterval = 20000.0
+        
+        URLSession.shared.dataTask(with: request) { data, res, err in
+            if let err = err {
+                onComplete(.failure(err))
+                return
             }
-            task.resume()
-            return Disposables.create {
-                task.cancel()
+            guard let data = data else {
+                let httpResponse = res as! HTTPURLResponse
+                onComplete(.failure(NSError(domain: "no data", code: httpResponse.statusCode, userInfo: nil)))
+                return
             }
-        }
+            
+            guard let response = try? JSONDecoder().decode(SearchImage.self, from: data) else {
+                onComplete(.failure(NSError(domain: "Decoding error", code: -1, userInfo: nil)))
+                return
+            }
+            onComplete(.success(response.documents))
+        }.resume()
     }
+    
+    
+    
+    
+    
+    
 }
 

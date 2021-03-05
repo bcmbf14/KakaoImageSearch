@@ -17,6 +17,10 @@
 		A8AEDFD225F0CD42006F58D3 /* KakaoImageSearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEDFD125F0CD42006F58D3 /* KakaoImageSearchUITests.swift */; };
 		A8B105EC25F1621E00489FAA /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B105EB25F1621E00489FAA /* Model.swift */; };
 		A8B105F525F1647900489FAA /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B105F425F1647900489FAA /* APIService.swift */; };
+		A8B1060825F205E400489FAA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B1060725F205E400489FAA /* ImageCollectionViewCell.swift */; };
+		A8B1060F25F20A0E00489FAA /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B1060D25F20A0E00489FAA /* ImageCollectionViewCell.xib */; };
+		A8B1061D25F225B100489FAA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B1061C25F225B100489FAA /* DetailViewController.swift */; };
+		A8B1062E25F2ECAB00489FAA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B1062D25F2ECAB00489FAA /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,10 @@
 		A8AEDFD325F0CD42006F58D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8B105EB25F1621E00489FAA /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		A8B105F425F1647900489FAA /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		A8B1060725F205E400489FAA /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		A8B1060D25F20A0E00489FAA /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		A8B1061C25F225B100489FAA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A8B1062D25F2ECAB00489FAA /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +128,7 @@
 				A8AEDFF425F15DDE006F58D3 /* View */,
 				A8B105F025F1623300489FAA /* Model */,
 				A8B105F925F1647E00489FAA /* Repository */,
+				A8B1063225F2ECAE00489FAA /* Utils */,
 			);
 			path = KakaoImageSearch;
 			sourceTree = "<group>";
@@ -165,7 +174,8 @@
 		A8AEDFF425F15DDE006F58D3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A8AEDFB325F0CD3F006F58D3 /* SearchImageViewController.swift */,
+				A8B1063A25F2ECE700489FAA /* VC */,
+				A8B1063625F2ECD700489FAA /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,6 +194,32 @@
 				A8B105F425F1647900489FAA /* APIService.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		A8B1063225F2ECAE00489FAA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A8B1062D25F2ECAB00489FAA /* Utils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A8B1063625F2ECD700489FAA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A8B1060725F205E400489FAA /* ImageCollectionViewCell.swift */,
+				A8B1060D25F20A0E00489FAA /* ImageCollectionViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A8B1063A25F2ECE700489FAA /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A8AEDFB325F0CD3F006F58D3 /* SearchImageViewController.swift */,
+				A8B1061C25F225B100489FAA /* DetailViewController.swift */,
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 		EFA51087C64F04AEA7BD0B72 /* Pods */ = {
@@ -302,6 +338,7 @@
 			files = (
 				A8AEDFBC25F0CD41006F58D3 /* LaunchScreen.storyboard in Resources */,
 				A8AEDFB925F0CD41006F58D3 /* Assets.xcassets in Resources */,
+				A8B1060F25F20A0E00489FAA /* ImageCollectionViewCell.xib in Resources */,
 				A8AEDFB725F0CD3F006F58D3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,7 +407,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8B105EC25F1621E00489FAA /* Model.swift in Sources */,
+				A8B1060825F205E400489FAA /* ImageCollectionViewCell.swift in Sources */,
 				A8AEDFB425F0CD3F006F58D3 /* SearchImageViewController.swift in Sources */,
+				A8B1062E25F2ECAB00489FAA /* Utils.swift in Sources */,
+				A8B1061D25F225B100489FAA /* DetailViewController.swift in Sources */,
 				A8B105F525F1647900489FAA /* APIService.swift in Sources */,
 				A8AEDFB025F0CD3F006F58D3 /* AppDelegate.swift in Sources */,
 			);
@@ -559,7 +599,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = bcmbf14.KakaoImageSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -579,7 +619,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = bcmbf14.KakaoImageSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
