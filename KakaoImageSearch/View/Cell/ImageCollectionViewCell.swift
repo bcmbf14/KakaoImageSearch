@@ -8,6 +8,11 @@
 import UIKit
 import RxSwift
 
+class ImageCacheManager {
+    static let shared = NSCache<NSString, UIImage>()
+    private init() {}
+}
+
 class ImageCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "ImageCollectionViewCell"
@@ -24,13 +29,20 @@ class ImageCollectionViewCell: UICollectionViewCell {
         
         searchImageView.image = nil
     }
-
-    private func loadImage(from url: String) -> Observable<UIImage?> {
+    
+    
+    private func loadImage(from urlStr: String) -> Observable<UIImage?> {
         return Observable.create { emitter in
-            guard let url = URL(string: url) ?? nil else {
+            guard let url = URL(string: urlStr) ?? nil else {
                 print("Invalid URL")
                 emitter.onNext(UIImage(systemName: "photo"))
                 return Disposables.create()
+            }
+            
+            let cacheKey = NSString(string: urlStr)
+
+            if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) {
+                emitter.onNext(cachedImage)
             }
             
             let task = URLSession.shared.dataTask(with: url) { data, _, error in
@@ -44,6 +56,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
                     emitter.onCompleted()
                     return
                 }
+                
+                ImageCacheManager.shared.setObject(image, forKey: cacheKey)
                 emitter.onNext(image)
                 emitter.onCompleted()
             }

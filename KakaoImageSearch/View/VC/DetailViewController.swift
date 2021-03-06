@@ -52,9 +52,7 @@ class DetailViewController: UIViewController {
         
         detailImageItems
             .map{$0.1}
-            .do(onNext: { [weak self] doc in
-                self?.displaySiteNameLabel.isHidden = doc == nil
-            })
+            .do(onNext: { [weak self] doc in self?.displaySiteNameLabel.isHidden = doc == nil })
             .filter{$0?.displaySitename != nil}
             .map{$0!.displaySitename}
             .bind(to: displaySiteNameLabel.rx.text)
@@ -63,9 +61,7 @@ class DetailViewController: UIViewController {
         
         detailImageItems
             .map{$0.1}
-            .do(onNext: { [weak self] doc in
-                self?.dateTimeLabel.isHidden = doc == nil
-            })
+            .do(onNext: { [weak self] doc in self?.dateTimeLabel.isHidden = doc == nil })
             .filter{$0?.datetime != nil}
             .map{$0!.datetime.currencyKR()}
             .bind(to: dateTimeLabel.rx.text)

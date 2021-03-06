@@ -13,33 +13,8 @@ let API_KEY = "KakaoAK babff94d55071a0898f77b445ffd368d"
 
 
 class APIService {
-    
-    static func searchImageRx(_ query: String,_ page: Int = 1) -> Observable<[Document]> {
-        
-        return Observable.create { emitter in
-        
-            searchImage(query: query, page: page) { result in
-                switch result {
-                case let .success(documents):
-                    emitter.onNext(documents)
-                    emitter.onCompleted()
-                case let .failure(error):
-                    emitter.onError(error)
-                }
-            }
-            
-            return Disposables.create()
-        }
-    }
-    
-    
-    enum Sort: String {
-        case accuracy
-        case recency
-    }
-    
-    static func searchImage(query: String = "", page: Int = 1,_ sort: String = Sort.accuracy.rawValue,_ size: Int = 30, onComplete: @escaping (Result<[Document], Error>) -> Void) {
-        
+ 
+    static func searchImage(query: String = "", page: Int = 1,_ sort: String = "accuracy",_ size: Int = 30, onComplete: @escaping (Result<[Document], Error>) -> Void) {
         guard query != "" else { return }
         
         let parameters = [
@@ -63,6 +38,7 @@ class APIService {
                 onComplete(.failure(err))
                 return
             }
+            
             guard let data = data else {
                 let httpResponse = res as! HTTPURLResponse
                 onComplete(.failure(NSError(domain: "no data", code: httpResponse.statusCode, userInfo: nil)))
@@ -76,6 +52,23 @@ class APIService {
             
             onComplete(.success(response.documents))
         }.resume()
+    }
+    
+    
+    
+    static func searchImageRx(_ query: String,_ page: Int = 1) -> Observable<[Document]> {
+        return Observable.create { emitter in
+            searchImage(query: query, page: page) { result in
+                switch result {
+                case let .success(documents):
+                    emitter.onNext(documents)
+                    emitter.onCompleted()
+                case let .failure(error):
+                    emitter.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
     }
        
 }

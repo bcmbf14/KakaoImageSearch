@@ -25,7 +25,6 @@ extension String {
 
 
 extension UICollectionView {
-    
     func emptyMessage() {
         let label = UILabel(frame: self.bounds)
         label.text = "검색 결과가 없습니다."
@@ -39,5 +38,4 @@ extension UICollectionView {
     func restore() {
         self.backgroundView = nil
     }
-    
 }
