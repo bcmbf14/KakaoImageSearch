@@ -12,17 +12,14 @@ let SEARCH_IMAGE_URL = "https://dapi.kakao.com/v2/search/image"
 let API_KEY = "KakaoAK babff94d55071a0898f77b445ffd368d"
 
 
-//query    String    검색을 원하는 질의어    O
-//sort    String    결과 문서 정렬 방식, accuracy(정확도순) 또는 recency(최신순), 기본 값 accuracy    X
-//page    Integer    결과 페이지 번호, 1~50 사이의 값, 기본 값 1    X
-//size    Integer    한 페이지에 보여질 문서 수, 1~80 사이의 값, 기본 값 80
-
 
 
 class APIService {
     
-    static func searchImageRx(_ query: String = "",_ page: Int = 1) -> Observable<[Document]> {
+    static func searchImageRx(_ query: String,_ page: Int = 1) -> Observable<[Document]> {
+        
         return Observable.create { emitter in
+        
             searchImage(query: query, page: page) { result in
                 switch result {
                 case let .success(documents):
@@ -32,6 +29,7 @@ class APIService {
                     emitter.onError(error)
                 }
             }
+            
             return Disposables.create()
         }
     }
@@ -43,7 +41,9 @@ class APIService {
         case recency
     }
     
-    static func searchImage(query: String = "", page: Int = 1,_ sort: String = Sort.accuracy.rawValue,_ size: Int = 80, onComplete: @escaping (Result<[Document], Error>) -> Void) {
+    static func searchImage(query: String = "", page: Int = 1,_ sort: String = Sort.accuracy.rawValue,_ size: Int = 30, onComplete: @escaping (Result<[Document], Error>) -> Void) {
+        
+        guard query != "" else { return }
         
         let parameters = [
             "query":query,
@@ -62,7 +62,7 @@ class APIService {
 //        request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue(API_KEY, forHTTPHeaderField: "Authorization")
 //        request.timeoutInterval = 20000.0
-        
+                
         URLSession.shared.dataTask(with: request) { data, res, err in
             if let err = err {
                 onComplete(.failure(err))
@@ -75,7 +75,7 @@ class APIService {
             }
             
             guard let response = try? JSONDecoder().decode(SearchImage.self, from: data) else {
-                onComplete(.failure(NSError(domain: "Decoding error", code: -1, userInfo: nil)))
+                onComplete(.failure(NSError(domain: "Decoding error", code: -1000, userInfo: nil)))
                 return
             }
             onComplete(.success(response.documents))

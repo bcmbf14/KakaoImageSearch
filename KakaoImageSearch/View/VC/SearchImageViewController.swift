@@ -15,12 +15,31 @@ class SearchImageViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     
-    let searchImageItems: BehaviorRelay<[Document]> = BehaviorRelay(value: [])
+//    let searchImageItems: BehaviorRelay<[Document]> = BehaviorRelay(value: [])
     var disposeBag = DisposeBag()
+    
+    let viewModel = ImageItemsViewModel()
     
     
     private func setupBindings() {
-        searchImageItems
+        
+        let itemsCount = viewModel.searchImageItems.map{$0.count-1}
+        let prefetchItems = listCollectionView.rx.prefetchItems
+            .map{$0.last?.row ?? 0}
+        
+        Observable.combineLatest(itemsCount, prefetchItems)
+            .asDriver(onErrorJustReturn: (0,0))
+            .filter{ $0.0 > 0 }
+            .filter{ $0 == $1 }
+            .map{_ in
+                self.viewModel.page += 1
+                return (self.searchBar.text ?? "", self.viewModel.page)}
+            .drive(viewModel.searchBarObservable)
+            .disposed(by: disposeBag)
+            
+            
+        
+        viewModel.searchImageItems
             .bind(to: listCollectionView.rx.items(cellIdentifier: ImageCollectionViewCell.identifier,
                                                   cellType: ImageCollectionViewCell.self)) { index, item, cell in
                 cell.setData(item)
@@ -30,16 +49,22 @@ class SearchImageViewController: UIViewController {
         
         searchBar.rx.text.orEmpty
             .debounce(.milliseconds(1000), scheduler: MainScheduler.instance)
-            .subscribe(onNext:fetchMenuItems)
+            .do(onNext: {_ in self.viewModel.totalItems = []})
+            .map{($0, 1)}
+            .asDriver(onErrorJustReturn: ("",1))
+            .drive(viewModel.searchBarObservable)
             .disposed(by: disposeBag)
         
         
-        let refreshControl = UIRefreshControl()
-        refreshControl.rx.controlEvent(.valueChanged)
-            .map{self.searchBar.text ?? ""}
-            .subscribe(onNext: fetchMenuItems)
-            .disposed(by: disposeBag)
-        listCollectionView.refreshControl = refreshControl
+        
+//        let refreshControl = UIRefreshControl()
+//        refreshControl.rx.controlEvent(.valueChanged)
+//            .map{(self.searchBar.text ?? "", 1)}
+//            .asDriver(onErrorJustReturn: ("", 1))
+//            .drive(viewModel.searchBarObservable)
+//            .disposed(by: disposeBag)
+//
+//        listCollectionView.refreshControl = refreshControl
     }
     
     private func configureUI() {
@@ -53,7 +78,7 @@ class SearchImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        fetchMenuItems()
+//        fetchMenuItems()
         setupBindings()
     }
     
@@ -63,21 +88,21 @@ class SearchImageViewController: UIViewController {
         present(alertVC, animated: true, completion: nil)
     }
     
-    func fetchMenuItems(_ query: String = "") {
-        
-        APIService.searchImageRx(query, 1)
-            .observe(on: MainScheduler.instance)
-            .do(onError: { [weak self] error in
-                //                self?.showAlert("Fetch Fail", error.localizedDescription)
-            }, onDispose: { [weak self] in
-                //                self?.activityIndicator.isHidden = true
-                //                Thread.sleep(forTimeInterval: 1)
-                self?.listCollectionView.refreshControl?.endRefreshing()
-            })
-            .asDriver(onErrorJustReturn: [])
-            .drive(searchImageItems)
-            .disposed(by: disposeBag)
-    }
+//    func fetchMenuItems(_ query: String = "", _ page: Int = 1) {
+//
+//        APIService.searchImageRx(query, page)
+//            .observe(on: MainScheduler.instance)
+//            .do(onError: { [weak self] error in
+//                //                self?.showAlert("Fetch Fail", error.localizedDescription)
+//            }, onDispose: { [weak self] in
+//                //                self?.activityIndicator.isHidden = true
+//                //                Thread.sleep(forTimeInterval: 1)
+//                self?.listCollectionView.refreshControl?.endRefreshing()
+//            })
+//            .asDriver(onErrorJustReturn: [])
+//            .drive(searchImageItems)
+//            .disposed(by: disposeBag)
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let identifier = segue.identifier ?? ""
@@ -85,8 +110,11 @@ class SearchImageViewController: UIViewController {
            let detailVC = segue.destination as? DetailViewController {
             
             if let tuple = sender as? (UIImage?, IndexPath) {
-                let items = searchImageItems.value
+                let items = viewModel.searchImageItems.value
                 detailVC.detailImageItems.accept((tuple.0, items[tuple.1.row]))
+                
+                
+                
             }
         }
     }

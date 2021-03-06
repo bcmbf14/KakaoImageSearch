@@ -21,6 +21,7 @@
 		A8B1060F25F20A0E00489FAA /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B1060D25F20A0E00489FAA /* ImageCollectionViewCell.xib */; };
 		A8B1061D25F225B100489FAA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B1061C25F225B100489FAA /* DetailViewController.swift */; };
 		A8B1062E25F2ECAB00489FAA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B1062D25F2ECAB00489FAA /* Utils.swift */; };
+		A8B1063F25F31F4C00489FAA /* ImageItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B1063E25F31F4C00489FAA /* ImageItemsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		A8B1060D25F20A0E00489FAA /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		A8B1061C25F225B100489FAA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A8B1062D25F2ECAB00489FAA /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		A8B1063E25F31F4C00489FAA /* ImageItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItemsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 			children = (
 				A8AEDFED25F15DCD006F58D3 /* App */,
 				A8AEDFF425F15DDE006F58D3 /* View */,
+				A8B1064325F31F5400489FAA /* ViewModel */,
 				A8B105F025F1623300489FAA /* Model */,
 				A8B105F925F1647E00489FAA /* Repository */,
 				A8B1063225F2ECAE00489FAA /* Utils */,
@@ -220,6 +223,14 @@
 				A8B1061C25F225B100489FAA /* DetailViewController.swift */,
 			);
 			path = VC;
+			sourceTree = "<group>";
+		};
+		A8B1064325F31F5400489FAA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A8B1063E25F31F4C00489FAA /* ImageItemsViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		EFA51087C64F04AEA7BD0B72 /* Pods */ = {
@@ -412,6 +423,7 @@
 				A8B1062E25F2ECAB00489FAA /* Utils.swift in Sources */,
 				A8B1061D25F225B100489FAA /* DetailViewController.swift in Sources */,
 				A8B105F525F1647900489FAA /* APIService.swift in Sources */,
+				A8B1063F25F31F4C00489FAA /* ImageItemsViewModel.swift in Sources */,
 				A8AEDFB025F0CD3F006F58D3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

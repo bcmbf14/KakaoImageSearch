@@ -38,7 +38,7 @@ class DetailViewController: UIViewController {
     private func configureUI() {
         scrollView.bounces = false
         
-        dismissButton.tintColor = .lightGray
+        dismissButton.tintColor = .darkGray
         dismissButton.setImage(UIImage(systemName: "xmark.circle.fill", withConfiguration: UIImage.SymbolConfiguration(textStyle:.largeTitle)), for: .normal)
     }
     

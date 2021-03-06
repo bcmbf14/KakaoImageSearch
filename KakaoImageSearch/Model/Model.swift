@@ -15,7 +15,8 @@ struct SearchImage: Decodable {
 
 // MARK: - Document
 struct Document: Decodable {
-    let collection, datetime, displaySitename: String
+    let collection: String
+    let datetime, displaySitename: String
     let docURL: String
     let height: Int
     let imageURL: String
@@ -23,7 +24,8 @@ struct Document: Decodable {
     let width: Int
 
     enum CodingKeys: String, CodingKey {
-        case collection, datetime
+        case collection
+        case datetime
         case displaySitename = "display_sitename"
         case docURL = "doc_url"
         case height
