@@ -29,7 +29,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
         setupBindings()
     }
@@ -43,7 +42,6 @@ class DetailViewController: UIViewController {
     }
     
     private func setupBindings() {
-        
         detailImageItems
             .map{$0.0}
             .filter{$0 != nil}
@@ -51,7 +49,7 @@ class DetailViewController: UIViewController {
             .bind(to: detailImageView.rx.image)
             .disposed(by: disposeBag)
         
-
+        
         detailImageItems
             .map{$0.1}
             .do(onNext: { [weak self] doc in

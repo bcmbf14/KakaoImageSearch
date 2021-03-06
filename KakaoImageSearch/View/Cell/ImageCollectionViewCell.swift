@@ -18,7 +18,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     func setData(_ data: Document) {
         loadImage(from: data.imageURL)
-            .asDriver(onErrorJustReturn: UIImage(systemName: "person.fill"))
+            .asDriver(onErrorJustReturn: UIImage(systemName: "photo"))
             .drive(searchImageView.rx.image)
             .disposed(by: disposeBag)
         
@@ -29,7 +29,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         return Observable.create { emitter in
             guard let url = URL(string: url) ?? nil else {
                 print("Invalid URL")
-                emitter.onNext(UIImage(systemName: "person.fill"))
+                emitter.onNext(UIImage(systemName: "photo"))
                 return Disposables.create()
             }
             

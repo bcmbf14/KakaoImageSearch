@@ -12,8 +12,6 @@ let SEARCH_IMAGE_URL = "https://dapi.kakao.com/v2/search/image"
 let API_KEY = "KakaoAK babff94d55071a0898f77b445ffd368d"
 
 
-
-
 class APIService {
     
     static func searchImageRx(_ query: String,_ page: Int = 1) -> Observable<[Document]> {
@@ -33,7 +31,6 @@ class APIService {
             return Disposables.create()
         }
     }
-    
     
     
     enum Sort: String {
@@ -59,9 +56,7 @@ class APIService {
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue(API_KEY, forHTTPHeaderField: "Authorization")
-//        request.timeoutInterval = 20000.0
                 
         URLSession.shared.dataTask(with: request) { data, res, err in
             if let err = err {
@@ -78,14 +73,10 @@ class APIService {
                 onComplete(.failure(NSError(domain: "Decoding error", code: -1000, userInfo: nil)))
                 return
             }
+            
             onComplete(.success(response.documents))
         }.resume()
     }
-    
-    
-    
-    
-    
-    
+       
 }
 
