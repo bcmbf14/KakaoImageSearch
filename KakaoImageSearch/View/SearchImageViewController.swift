@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Alamofire
 
 class SearchImageViewController: UIViewController {
     
@@ -15,7 +16,26 @@ class SearchImageViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     let viewModel = ImageItemsViewModel()
+    
     var disposeBag = DisposeBag()
+    
+    var imageService : ImageService!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUI()
+        setupBindings()
+    }
+
+    
+    private func configureUI() {
+        searchBar.autocapitalizationType = .none
+        
+        listCollectionView.dataSource = nil
+        listCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
+        listCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+    }
     
     
     private func setupBindings() {
@@ -32,7 +52,6 @@ class SearchImageViewController: UIViewController {
                 return (self.searchBar.text ?? "", self.viewModel.page)}
             .drive(viewModel.searchBarObservable)
             .disposed(by: disposeBag)
-        
         
         
         viewModel.searchImageItems
@@ -56,58 +75,12 @@ class SearchImageViewController: UIViewController {
             .drive(viewModel.searchBarObservable)
             .disposed(by: disposeBag)
         
-        
-        
-        //        let refreshControl = UIRefreshControl()
-        //        refreshControl.rx.controlEvent(.valueChanged)
-        //            .map{(self.searchBar.text ?? "", 1)}
-        //            .asDriver(onErrorJustReturn: ("", 1))
-        //            .drive(viewModel.searchBarObservable)
-        //            .disposed(by: disposeBag)
-        //
-        //        listCollectionView.refreshControl = refreshControl
     }
     
-    private func configureUI() {
-        searchBar.autocapitalizationType = .none
-        
-        listCollectionView.dataSource = nil
-        listCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
-        listCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureUI()
-        //        fetchMenuItems()
-        setupBindings()
-    }
-    
-    func showAlert(_ title: String, _ message: String) {
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alertVC, animated: true, completion: nil)
-    }
-    
-    //    func fetchMenuItems(_ query: String = "", _ page: Int = 1) {
-    //
-    //        APIService.searchImageRx(query, page)
-    //            .observe(on: MainScheduler.instance)
-    //            .do(onError: { [weak self] error in
-    //                //                self?.showAlert("Fetch Fail", error.localizedDescription)
-    //            }, onDispose: { [weak self] in
-    //                //                self?.activityIndicator.isHidden = true
-    //                //                Thread.sleep(forTimeInterval: 1)
-    //                self?.listCollectionView.refreshControl?.endRefreshing()
-    //            })
-    //            .asDriver(onErrorJustReturn: [])
-    //            .drive(searchImageItems)
-    //            .disposed(by: disposeBag)
-    //    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let identifier = segue.identifier ?? ""
-        if identifier == "aaa",
+        if identifier == "DetailViewController",
            let detailVC = segue.destination as? DetailViewController {
             
             if let tuple = sender as? (UIImage?, IndexPath) {
@@ -116,6 +89,8 @@ class SearchImageViewController: UIViewController {
             }
         }
     }
+    
+    
 }
 
 
@@ -123,7 +98,7 @@ extension SearchImageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell
-        performSegue(withIdentifier: "aaa", sender: (cell?.searchImageView.image , indexPath))
+        performSegue(withIdentifier: "DetailViewController", sender: (cell?.searchImageView.image , indexPath))
     }
     
 }

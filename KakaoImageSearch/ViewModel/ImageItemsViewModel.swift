@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Alamofire
 
 class ImageItemsViewModel {
     
@@ -18,16 +19,17 @@ class ImageItemsViewModel {
     var page = 1
 
     var disposeBag = DisposeBag()
+    
+    let imageService = ImageService(sessionManager: Session.default)
+    
 
     init() {
-        
         searchBarObservable
-            .flatMap(APIService.searchImageRx)
+            .flatMap(imageService.searchRx)
             .map(appendItems)
             .asDriver(onErrorJustReturn: [])
             .drive(searchImageItems)
             .disposed(by: disposeBag)
-    
     }
         
     private func appendItems(_ items: [Document]) -> [Document]{

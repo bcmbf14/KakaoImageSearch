@@ -18,14 +18,15 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var dateTimeLabel: UILabel!
     
     
-    var disposeBag = DisposeBag()
-    
-    let detailImageItems: BehaviorRelay<(UIImage?, Document?)> = BehaviorRelay(value: (nil, nil))
-    
-    
     @IBAction func popAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    let detailImageItems: BehaviorRelay<(UIImage?, Document?)> = BehaviorRelay(value: (nil, nil))
+    
+    var disposeBag = DisposeBag()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class DetailViewController: UIViewController {
         dismissButton.tintColor = .darkGray
         dismissButton.setImage(UIImage(systemName: "xmark.circle.fill", withConfiguration: UIImage.SymbolConfiguration(textStyle:.largeTitle)), for: .normal)
     }
+    
     
     private func setupBindings() {
         detailImageItems

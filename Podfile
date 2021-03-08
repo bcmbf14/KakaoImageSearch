@@ -9,5 +9,8 @@ target 'KakaoImageSearch' do
 
   pod 'RxSwift'
   pod 'RxCocoa'
-
+  pod 'Alamofire'
+  
+  target 'KakaoImageSearchTests' do
+  end
 end

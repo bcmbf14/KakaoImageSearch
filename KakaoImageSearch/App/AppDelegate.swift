@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,11 +14,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        if let rootViewController = self.rootViewController() {
+            let imageService = ImageService(sessionManager: Session.default)
+            rootViewController.imageService = imageService
+        }
+        
         return true
     }
 
-  
+    private func rootViewController() -> SearchImageViewController? {
+        guard let nav = self.window?.rootViewController as? UINavigationController else { return nil }
+        return nav.viewControllers.first as? SearchImageViewController
+    }
 
 }
 
