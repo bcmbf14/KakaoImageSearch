@@ -30,6 +30,10 @@ class ImageCollectionViewCell: UICollectionViewCell {
         searchImageView.image = nil
     }
     
+    override func prepareForReuse() {
+        searchImageView.image = nil
+    }
+    
     
     private func loadImage(from urlStr: String) -> Observable<UIImage?> {
         return Observable.create { emitter in
