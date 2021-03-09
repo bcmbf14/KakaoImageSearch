@@ -20,7 +20,7 @@
  - response 데이터에 출처 'display_sitename', 문서 작성 시간 'datetime'이 있을 경우 전체화면 이미지 밑에 표시해 줍니다.
 
 ## Skill
-RxSwift, RxCocoa, Codable, Storyboard, UIKit, , Driver, Bind
+RxSwift, RxCocoa, Codable, Storyboard, UIKit, Driver, Bind
 
 ## Test
 Mock을 사용한 네트워킹 테스트 추가
